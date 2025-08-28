@@ -1,1 +1,1 @@
-# My Cursor Agent 
+print("Hello from Cursor Agent")
