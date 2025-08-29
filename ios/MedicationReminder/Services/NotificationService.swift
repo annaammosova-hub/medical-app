@@ -46,6 +46,26 @@ final class NotificationService: NSObject, UNUserNotificationCenterDelegate {
         }
     }
 
+    // Schedule a one-off snooze notification
+    func scheduleSnooze(assignmentId: UUID, memberName: String, medication: Medication, fireDate: Date) {
+        let center = UNUserNotificationCenter.current()
+
+        let content = UNMutableNotificationContent()
+        content.title = "Напоминание (отложено)"
+        content.body = "\(memberName): \(medication.name) — \(medication.dosage)"
+        content.sound = .default
+
+        let comps = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fireDate)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: comps, repeats: false)
+        let id = "snooze_\(assignmentId.uuidString)_\(Int(fireDate.timeIntervalSince1970))"
+        let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
+        center.add(request) { error in
+            if let error = error {
+                print("Failed to schedule snooze: \(error)")
+            }
+        }
+    }
+
     // Foreground presentation
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .sound])

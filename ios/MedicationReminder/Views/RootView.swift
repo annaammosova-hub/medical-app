@@ -3,6 +3,16 @@ import SwiftUI
 struct RootView: View {
     var body: some View {
         TabView {
+            TodayView()
+                .tabItem {
+                    Label("Сегодня", systemImage: "sun.max")
+                }
+
+            CalendarView()
+                .tabItem {
+                    Label("Календарь", systemImage: "calendar")
+                }
+
             MembersView()
                 .tabItem {
                     Label("Семья", systemImage: "person.3")
@@ -13,9 +23,9 @@ struct RootView: View {
                     Label("Лекарства", systemImage: "pills")
                 }
 
-            AssignmentsView()
+            ShoppingView()
                 .tabItem {
-                    Label("Расписание", systemImage: "calendar")
+                    Label("Покупки", systemImage: "cart")
                 }
         }
     }
