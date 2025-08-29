@@ -1,0 +1,20 @@
+name: MedicationReminder
+options:
+  deploymentTarget:
+    iOS: 17.0
+targets:
+  MedicationReminder:
+    type: application
+    platform: iOS
+    sources:
+      - path: .
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.MedicationReminder
+        DEVELOPMENT_TEAM: ""
+        INFOPLIST_FILE: Info.plist
+    dependencies:
+      - sdk: UserNotifications.framework
+    scheme:
+      testTargets: []
+
